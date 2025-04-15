@@ -3,11 +3,11 @@ CREATE DATABASE pedraodb;
 CREATE TABLE products (
 	id 		SERIAL PRIMARY KEY,
 	name  		VARCHAR(256),
-	url 		VARCHAR(256),
+	url 		TEXT UNIQUE,
 	picture_path	VARCHAR(256),
 	coupon		VARCHAR(64),
 	category	VARCHAR(64),
-	phrase		VARCHAR(512)
+	phrase		TEXT,
 );
 
 CREATE TABLE product_price (

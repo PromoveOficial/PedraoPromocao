@@ -1,1 +1,104 @@
 
+[04/04/2025::16:14:14] READ id FROM products/6
+[04/04/2025::16:14:14] READ 'name, url, picture_path, price' FROM products
+[04/04/2025::16:14:14] READ id FROM products/5
+[04/04/2025::16:21:58] READ id FROM products/6
+[04/04/2025::16:21:58] READ id FROM products/6
+[04/04/2025::16:21:58] READ 'name, url, picture_path, price' FROM products
+[04/04/2025::16:21:58] READ id FROM products/6
+[04/04/2025::16:22:00] READ id FROM products/6
+[04/04/2025::16:22:00] READ id FROM products/6
+[04/04/2025::16:22:00] READ 'name, url, picture_path, price' FROM products
+[04/04/2025::16:22:00] READ id FROM products/6
+[14/04/2025::15:35:24]teste
+[14/04/2025::15:47:24] TRY -> ADD NEW IN products VALUES (nome2, caminho/imagem2, CUPOM20 SpF20, Frase foda 2)
+[14/04/2025::15:47:24] READ id FROM products/13
+[14/04/2025::15:48:11] TRY -> ADD NEW IN products VALUES (nome2, caminho/imagem2, CUPOM20 SpF20, Frase foda 2)
+[14/04/2025::15:48:11] READ id FROM products/14
+[14/04/2025::16:05:12] TRY -> ADD NEW IN products VALUES (nome2, caminho/imagem2, CUPOM20 SpF20, Frase foda 2)
+[14/04/2025::16:05:12] READ id FROM products/15
+[14/04/2025::16:05:38] TRY -> ADD NEW IN products VALUES (nome2, caminho/imagem2, CUPOM20 SpF20, Frase foda 2)
+[14/04/2025::16:05:42] TRY -> ADD NEW IN products VALUES (nome2, caminho/imagem2, CUPOM20 SpF20, Frase foda 2)
+[14/04/2025::16:05:42] READ id FROM products/17
+[14/04/2025::16:06:05] TRY -> ADD NEW IN products VALUES (nome2, caminho/imagem2, CUPOM20 SpF20, Frase foda 2)
+[14/04/2025::16:06:05] READ id FROM products/18
+[14/04/2025::16:06:05]ADDED NEW price IN product_price/18
+[14/04/2025::16:06:05] READ id FROM products/18
+[14/04/2025::16:06:05] ADDED NEW IN products/18 VALUES (nome2, caminho/imagem2, CUPOM20 SpF20, Frase foda 2)
+[14/04/2025::16:06:05]teste
+[14/04/2025::16:18:24] FAIL READ id FROM products/{productID}
+[14/04/2025::16:19:19] FAIL READ id FROM products/{productID}
+[14/04/2025::16:19:39] FAIL READ id FROM products/{productID}
+[14/04/2025::16:20:31] FAIL READ id FROM products/{productID}
+[14/04/2025::16:20:31] READ name, url, picture_path, price FROM products/-1
+[14/04/2025::16:20:31]teste
+[14/04/2025::16:20:52] FAIL READ id FROM products/{productID}
+[14/04/2025::16:20:52] READ name, url, picture_path, price FROM products/-1
+[14/04/2025::16:21:02] READ id FROM products/18
+[14/04/2025::16:21:02] READ name, url, picture_path, price FROM products/18
+[14/04/2025::16:22:25] FAIL READ id FROM products/{productID}
+[14/04/2025::16:22:25] READ name, url, picture_path, price FROM products/-1
+[14/04/2025::16:23:09] FAIL READ id FROM products/{productID}
+[14/04/2025::16:23:09] READ name, url, picture_path, price FROM products/-1
+[14/04/2025::16:23:53] FAIL READ id FROM products/{productID}
+[14/04/2025::16:23:53] READ name, url, picture_path, price FROM products/-1
+[14/04/2025::16:25:46] TRY -> ADD NEW IN products VALUES (nome2, caminho/imagem2, CUPOM20 SpF20, Frase foda 2)
+[14/04/2025::16:25:46] READ id FROM products/19
+[14/04/2025::16:25:46]ADDED NEW price IN product_price/19
+[14/04/2025::16:25:46] READ id FROM products/19
+[14/04/2025::16:25:46] ADDED NEW IN products/19 VALUES (nome2, caminho/imagem2, CUPOM20 SpF20, Frase foda 2)
+[14/04/2025::16:25:46] READ id FROM products/19
+[14/04/2025::16:25:46] READ name, url, picture_path, price FROM products/19
+[14/04/2025::16:25:46] READ id FROM products/19
+[14/04/2025::16:26:30] READ id FROM products/19
+[14/04/2025::16:26:30] READ name, url, picture_path, price FROM products/19
+[15/04/2025::14:11:39] READ id FROM products/19
+[15/04/2025::14:11:39] READ name, url, picture_path, price FROM products/19
+[15/04/2025::14:11:39] DATABASE ERROR: ERRO:  erro de sintaxe em ou próximo a "nome2"
+LINE 4:                         WHERE url = '('nome2', 'site3.com', ...
+                                               ^
+
+[15/04/2025::14:12:14] READ id FROM products/19
+[15/04/2025::14:12:14] READ name, url, picture_path, price FROM products/19
+[15/04/2025::14:12:14] DATABASE ERROR: ERRO:  erro de sintaxe em ou próximo a "nome2"
+LINE 4:                         WHERE url = '('nome2', 'site3.com', ...
+                                               ^
+
+[15/04/2025::14:12:14] [TRY] ADD NEW IN products VALUES (teste40, teste/teste, COUPON10 FGHJ, Frase foda)
+[15/04/2025::14:13:17] READ id FROM products/19
+[15/04/2025::14:13:17] READ name, url, picture_path, price FROM products/19
+[15/04/2025::14:13:17] DATABASE ERROR: ERRO:  erro de sintaxe em ou próximo a "nome2"
+LINE 4:                         WHERE url = '('nome2', 'site3.com', ...
+                                               ^
+
+[15/04/2025::14:13:17] [TRY] ADD NEW IN products VALUES (teste40, teste/teste, COUPON10 FGHJ, Frase foda)
+[15/04/2025::14:13:33] READ id FROM products/19
+[15/04/2025::14:13:33] READ name, url, picture_path, price FROM products/19
+[15/04/2025::14:13:33] DATABASE ERROR: ERRO:  erro de sintaxe em ou próximo a "nome2"
+LINE 4:                         WHERE url = '('nome2', 'site3.com', ...
+                                               ^
+
+[15/04/2025::14:13:33] [TRY] ADD NEW IN products VALUES (teste40, teste/teste, COUPON10 FGHJ, Frase foda)
+[15/04/2025::14:13:33] DATABASE ERROR: ERRO:  duplicar valor da chave viola a restrição de unicidade "unique_url"
+DETAIL:  Chave (url)=(site.com) já existe.
+
+[15/04/2025::14:15:32] FAIL READ id FROM products/site3.com: Not found
+[15/04/2025::14:15:32] READ name, url, picture_path, price FROM products/-1
+[15/04/2025::14:15:32] FAIL READ id FROM products/None: Not found
+[15/04/2025::14:15:32] [TRY] ADD NEW IN products VALUES (teste40, teste/teste, COUPON10 FGHJ, Frase foda)
+[15/04/2025::14:15:32] READ id FROM products/22
+[15/04/2025::14:15:32] [TRY] ADD NEW IN product_price VALUES (320.4, 22)
+[15/04/2025::14:15:32] ADDED NEW price IN product_price/22
+[15/04/2025::14:15:32] READ id FROM products/22
+[15/04/2025::14:15:32] ADDED NEW IN products/22 VALUES (teste40, teste/teste, COUPON10 FGHJ, Frase foda)
+[15/04/2025::14:21:26] FAIL READ id FROM products/site3.com: Not found
+[15/04/2025::14:21:26] READ name, url, picture_path, price FROM products/-1
+[15/04/2025::14:21:26] FAIL READ id FROM products/None: Not found
+[15/04/2025::14:22:31] FAIL READ id FROM products/site300.com: Not found
+[15/04/2025::14:22:55] READ id FROM products/22
+[15/04/2025::14:24:02] READ id FROM products/22
+[15/04/2025::14:24:02] READ name, price, active FROM products/22
+[15/04/2025::14:24:09] FAIL READ id FROM products/22: Not found
+[15/04/2025::14:24:09] READ name, price, active FROM products/22
+[15/04/2025::14:24:13] FAIL READ id FROM products/23: Not found
+[15/04/2025::14:24:13] READ name, price, active FROM products/23
