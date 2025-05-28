@@ -1,5 +1,6 @@
 import psycopg2 as psy
 from datetime import date, datetime
+import time
 
 connection = {
 "dbname":       "pedraodb",
@@ -9,28 +10,29 @@ connection = {
 "port":         "5432"
 }
 
-def addProduct(name, url, picturePath, price, coupon, category, phrase):
+def addProduct(name, url, price, coupon, category, phrase):
     try:
         with psy.connect(**connection) as conn:
             with conn.cursor() as cur:
-                log(f"[TRY] ADD NEW IN products VALUES ({name}, {picturePath}, {coupon} {category}, {phrase})")
+                log(f"[TRY] ADD NEW IN products VALUES ({name}, {coupon} {category}, {phrase})")
                 query = f""" 
-                    INSERT INTO products(name, url, picture_path, coupon, category, phrase) 
+                    INSERT INTO products(name, url, coupon, category, phrase) 
                     VALUES(%s, %s, %s, %s, %s, %s);
                 """
-                cur.execute(query, (name, url, picturePath, coupon, category, phrase))
+                cur.execute(query, (name, url, coupon, category, phrase))
                 conn.commit()
                 
                 addPrice(price, url)
-
-                log(f"ADDED NEW IN products/{getProductID(url)} VALUES ({name}, {picturePath}, {coupon} {category}, {phrase})")
+                
+                log(f"ADDED NEW IN products/{getProductID(url)} VALUES ({name}, {coupon} {category}, {phrase})")
+                return 1
             
     except psy.Error as e:
         log(f"DATABASE ERROR: {e}")
         return -1
 
 
-()
+#price deve estar no formato 0000,00 ou 0000.00
 def addPrice(price, iden):
     try: 
         with psy.connect(**connection) as conn:
@@ -57,6 +59,7 @@ def addPrice(price, iden):
                 new_price_id = cur.fetchone()[0]
 
                 log(f"ADDED NEW price IN product_price/{product_id}")
+                return 1
     except psy.Error as e:
         log(f"DATABASE ERROR: {e}")
         return -1
@@ -68,7 +71,8 @@ def getProduct(iden, *columns):
         with psy.connect(**connection) as conn:
             with conn.cursor() as cur:
 
-                formated_columns = ", ".join(columns)
+                columns = ", ".join(columns)
+                log(f"[TRY] READ {columns} FROM products/{iden}")
 
                 where_clause = {
                     str: f"WHERE url = '{iden}'",
@@ -76,7 +80,7 @@ def getProduct(iden, *columns):
                 }
 
                 query = f""" 
-                            SELECT {formated_columns}
+                            SELECT {columns}
                                 FROM product_price
                                 NATURAL JOIN products
                                 {where_clause[type(iden)]}
@@ -88,8 +92,8 @@ def getProduct(iden, *columns):
                 product = cur.fetchone()
 
                 logs = {
-                    str: f"READ {formated_columns} FROM products/{getProductID(iden)}",
-                    int: f"READ {formated_columns} FROM products/{iden}"
+                    str: f"READ {columns} FROM products/{getProductID(iden)}",
+                    int: f"READ {columns} FROM products/{iden}"
                 }
                 log(logs[type(iden)])
 
@@ -119,6 +123,59 @@ def getProductID(url):
         return -1
     except TypeError: 
         log(f"FAIL READ id FROM products/{url}: Not found")
+        return -1
+
+
+def updateProduct(iden, name=None, url=None, picturePath=None, price=None, coupon=None, category=None, phrase=None):
+    try:
+        product_id = getProductID(iden if isinstance(iden, str) else None) if isinstance(iden, str) else iden
+        if product_id == -1:
+            log(f"UPDATE FAILED: Product not found for {iden}")
+            return -1
+
+        updates = []
+        values = []
+
+        if name is not None:
+            updates.append("name = %s")
+            values.append(name)
+        if url is not None:
+            updates.append("url = %s")
+            values.append(url)
+        if picturePath is not None:
+            updates.append("picture_path = %s")
+            values.append(picturePath)
+        if coupon is not None:
+            updates.append("coupon = %s")
+            values.append(coupon)
+        if category is not None:
+            updates.append("category = %s")
+            values.append(category)
+        if phrase is not None:
+            updates.append("phrase = %s")
+            values.append(phrase)
+
+        if updates:
+            with psy.connect(**connection) as conn:
+                with conn.cursor() as cur:
+                    set_clause = ", ".join(updates)
+                    query = f"""
+                        UPDATE products
+                        SET {set_clause}
+                        WHERE product_id = %s;
+                    """
+                    values.append(product_id)
+                    cur.execute(query, tuple(values))
+                    conn.commit()
+                    log(f"UPDATED {updates} FROM products/{product_id}")
+
+        # Verificar e inserir novo preço (sem sobrescrever os antigos)
+        if price is not None:
+            addPrice(price, iden)
+        return 1
+
+    except psy.Error as e:
+        log(f"DATABASE ERROR (update): {e}")
         return -1
 
 def log(msg):

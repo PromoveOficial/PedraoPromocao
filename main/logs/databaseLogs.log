@@ -102,3 +102,40 @@ DETAIL:  Chave (url)=(site.com) já existe.
 [15/04/2025::14:24:09] READ name, price, active FROM products/22
 [15/04/2025::14:24:13] FAIL READ id FROM products/23: Not found
 [15/04/2025::14:24:13] READ name, price, active FROM products/23
+[28/04/2025::14:41:33] [TRY] ADD NEW IN products VALUES (teste500k, 5/0/0/k/./c/o/m, 500KK iss, teste)
+[28/04/2025::14:41:52] [TRY] ADD NEW IN products VALUES (teste500k, 5/0/0/k/./c/o/m, 500KK iss, teste)
+[28/04/2025::14:42:26] [TRY] ADD NEW IN products VALUES (teste500k, 5/0/0/k/./c/o/m, 500KK iss, teste)
+[28/04/2025::14:43:02] [TRY] ADD NEW IN products VALUES (teste500k, 5/0/0/k/./c/o/m, 500KK iss, teste)
+[28/04/2025::14:43:40] [TRY] ADD NEW IN products VALUES (teste500k, 5/0/0/k/./c/o/m, 500KK iss, teste)
+[28/04/2025::14:44:09] [TRY] ADD NEW IN products VALUES (teste500k, 5/0/0/k/./c/o/m, 500KK iss, teste)
+[28/04/2025::14:44:09] READ id FROM products/23
+[28/04/2025::14:44:09] [TRY] ADD NEW IN product_price VALUES (500.005, 23)
+[28/04/2025::14:44:09] ADDED NEW price IN product_price/23
+[28/04/2025::14:44:09] READ id FROM products/23
+[28/04/2025::14:44:09] ADDED NEW IN products/23 VALUES (teste500k, 5/0/0/k/./c/o/m, 500KK iss, teste)
+[28/04/2025::14:55:27] READ id FROM products/22
+[28/04/2025::14:55:27] UPDATED product 22: name = %s
+[28/04/2025::14:55:27] ADDED new price 700.07 to product 22
+[28/04/2025::14:58:10] READ id FROM products/22
+[28/04/2025::14:58:10] UPDATED product 22: name = %s
+[28/04/2025::14:58:10] PRICE UNCHANGED for product 22
+[28/04/2025::14:59:51] READ id FROM products/23
+[28/04/2025::14:59:51] DATABASE ERROR (update): ERRO:  duplicar valor da chave viola a restrição de unicidade "unique_url"
+DETAIL:  Chave (url)=(site.com) já existe.
+
+[28/04/2025::15:00:22] READ id FROM products/23
+[28/04/2025::15:00:22] UPDATED product 23: picture_path = %s
+[28/04/2025::15:00:37] READ id FROM products/23
+[28/04/2025::15:00:37] UPDATED product 23: picture_path = %s
+[28/04/2025::15:03:48] READ id FROM products/23
+[28/04/2025::15:03:48] UPDATED ['phrase = %s'] FROM products/23
+[21/05/2025::14:34:27] [TRY] ADD NEW IN products VALUES (Natura Homem DOM - 100 ml | Natura, h/t/t/p/s/://///w/w/w/./a/m/a/z/o/n/./c/o/m/./b/r///N/a/t/u/r/a/-/H/o/m/e/m/-/D/O/M/-/1/0/0///d/p///B/0/7/W/D/Z/G/Y/B/S///?/_/e/n/c/o/d/i/n/g/=/U/T/F/8/&/r/e/f/_/=/p/d/_/h/p/_/d/_/a/t/f/_/c/i/_/m/c/x/_/m/r/_/c/a/_/h/p/_/a/t/f/_/d,  , )
+[21/05/2025::14:34:27] READ id FROM products/24
+[21/05/2025::14:34:27] [TRY] ADD NEW IN product_price VALUES (Natura Homem DOM - 100 ml | Natura, 24)
+[21/05/2025::14:34:27] DATABASE ERROR: ERRO:  valor é muito longo para tipo character varying(20)
+
+[21/05/2025::14:34:27] READ id FROM products/24
+[21/05/2025::14:34:27] ADDED NEW IN products/24 VALUES (Natura Homem DOM - 100 ml | Natura, h/t/t/p/s/://///w/w/w/./a/m/a/z/o/n/./c/o/m/./b/r///N/a/t/u/r/a/-/H/o/m/e/m/-/D/O/M/-/1/0/0///d/p///B/0/7/W/D/Z/G/Y/B/S///?/_/e/n/c/o/d/i/n/g/=/U/T/F/8/&/r/e/f/_/=/p/d/_/h/p/_/d/_/a/t/f/_/c/i/_/m/c/x/_/m/r/_/c/a/_/h/p/_/a/t/f/_/d,  , )
+[21/05/2025::14:34:27] [TRY] READ name, picture_path, price FROM products/https://www.amazon.com.br/Natura-Homem-DOM-100/dp/B07WDZGYBS/?_encoding=UTF8&ref_=pd_hp_d_atf_ci_mcx_mr_ca_hp_atf_d
+[21/05/2025::14:34:27] READ id FROM products/24
+[21/05/2025::14:34:27] READ name, picture_path, price FROM products/24
