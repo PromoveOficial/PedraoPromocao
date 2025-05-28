@@ -1,141 +1,32 @@
 
-[04/04/2025::16:14:14] READ id FROM products/6
-[04/04/2025::16:14:14] READ 'name, url, picture_path, price' FROM products
-[04/04/2025::16:14:14] READ id FROM products/5
-[04/04/2025::16:21:58] READ id FROM products/6
-[04/04/2025::16:21:58] READ id FROM products/6
-[04/04/2025::16:21:58] READ 'name, url, picture_path, price' FROM products
-[04/04/2025::16:21:58] READ id FROM products/6
-[04/04/2025::16:22:00] READ id FROM products/6
-[04/04/2025::16:22:00] READ id FROM products/6
-[04/04/2025::16:22:00] READ 'name, url, picture_path, price' FROM products
-[04/04/2025::16:22:00] READ id FROM products/6
-[14/04/2025::15:35:24]teste
-[14/04/2025::15:47:24] TRY -> ADD NEW IN products VALUES (nome2, caminho/imagem2, CUPOM20 SpF20, Frase foda 2)
-[14/04/2025::15:47:24] READ id FROM products/13
-[14/04/2025::15:48:11] TRY -> ADD NEW IN products VALUES (nome2, caminho/imagem2, CUPOM20 SpF20, Frase foda 2)
-[14/04/2025::15:48:11] READ id FROM products/14
-[14/04/2025::16:05:12] TRY -> ADD NEW IN products VALUES (nome2, caminho/imagem2, CUPOM20 SpF20, Frase foda 2)
-[14/04/2025::16:05:12] READ id FROM products/15
-[14/04/2025::16:05:38] TRY -> ADD NEW IN products VALUES (nome2, caminho/imagem2, CUPOM20 SpF20, Frase foda 2)
-[14/04/2025::16:05:42] TRY -> ADD NEW IN products VALUES (nome2, caminho/imagem2, CUPOM20 SpF20, Frase foda 2)
-[14/04/2025::16:05:42] READ id FROM products/17
-[14/04/2025::16:06:05] TRY -> ADD NEW IN products VALUES (nome2, caminho/imagem2, CUPOM20 SpF20, Frase foda 2)
-[14/04/2025::16:06:05] READ id FROM products/18
-[14/04/2025::16:06:05]ADDED NEW price IN product_price/18
-[14/04/2025::16:06:05] READ id FROM products/18
-[14/04/2025::16:06:05] ADDED NEW IN products/18 VALUES (nome2, caminho/imagem2, CUPOM20 SpF20, Frase foda 2)
-[14/04/2025::16:06:05]teste
-[14/04/2025::16:18:24] FAIL READ id FROM products/{productID}
-[14/04/2025::16:19:19] FAIL READ id FROM products/{productID}
-[14/04/2025::16:19:39] FAIL READ id FROM products/{productID}
-[14/04/2025::16:20:31] FAIL READ id FROM products/{productID}
-[14/04/2025::16:20:31] READ name, url, picture_path, price FROM products/-1
-[14/04/2025::16:20:31]teste
-[14/04/2025::16:20:52] FAIL READ id FROM products/{productID}
-[14/04/2025::16:20:52] READ name, url, picture_path, price FROM products/-1
-[14/04/2025::16:21:02] READ id FROM products/18
-[14/04/2025::16:21:02] READ name, url, picture_path, price FROM products/18
-[14/04/2025::16:22:25] FAIL READ id FROM products/{productID}
-[14/04/2025::16:22:25] READ name, url, picture_path, price FROM products/-1
-[14/04/2025::16:23:09] FAIL READ id FROM products/{productID}
-[14/04/2025::16:23:09] READ name, url, picture_path, price FROM products/-1
-[14/04/2025::16:23:53] FAIL READ id FROM products/{productID}
-[14/04/2025::16:23:53] READ name, url, picture_path, price FROM products/-1
-[14/04/2025::16:25:46] TRY -> ADD NEW IN products VALUES (nome2, caminho/imagem2, CUPOM20 SpF20, Frase foda 2)
-[14/04/2025::16:25:46] READ id FROM products/19
-[14/04/2025::16:25:46]ADDED NEW price IN product_price/19
-[14/04/2025::16:25:46] READ id FROM products/19
-[14/04/2025::16:25:46] ADDED NEW IN products/19 VALUES (nome2, caminho/imagem2, CUPOM20 SpF20, Frase foda 2)
-[14/04/2025::16:25:46] READ id FROM products/19
-[14/04/2025::16:25:46] READ name, url, picture_path, price FROM products/19
-[14/04/2025::16:25:46] READ id FROM products/19
-[14/04/2025::16:26:30] READ id FROM products/19
-[14/04/2025::16:26:30] READ name, url, picture_path, price FROM products/19
-[15/04/2025::14:11:39] READ id FROM products/19
-[15/04/2025::14:11:39] READ name, url, picture_path, price FROM products/19
-[15/04/2025::14:11:39] DATABASE ERROR: ERRO:  erro de sintaxe em ou próximo a "nome2"
-LINE 4:                         WHERE url = '('nome2', 'site3.com', ...
-                                               ^
+[25/05/2025::20:53:57] [TRY] ADD NEW IN products VALUES (Salon Line, Gelatina Capilar, ToDeCacho, Super Definição, Vegano - Cabelos Ondulados, Cacheados e Crespos, 1 Kg,  , )
+[25/05/2025::20:55:34] [TRY] ADD NEW IN products VALUES (Salon Line, Gelatina Capilar, ToDeCacho, Super Definição, Vegano - Cabelos Ondulados, Cacheados e Crespos, 1 Kg,  , )
+[25/05/2025::20:59:12] [TRY] ADD NEW IN products VALUES (Notebook Lenovo LOQ-e 15iax9e Intel Core i5-12450hx 16gb 512gb Ssd Rtx 3050 Windows 11 15.6 - 83me0007br Luna Grey,  , )
+[25/05/2025::20:59:12] DATABASE ERROR: ERRO:  valor é muito longo para tipo character varying(256)
 
-[15/04/2025::14:12:14] READ id FROM products/19
-[15/04/2025::14:12:14] READ name, url, picture_path, price FROM products/19
-[15/04/2025::14:12:14] DATABASE ERROR: ERRO:  erro de sintaxe em ou próximo a "nome2"
-LINE 4:                         WHERE url = '('nome2', 'site3.com', ...
-                                               ^
+[27/05/2025::14:13:00] [TRY] ADD NEW IN products VALUES (Notebook Lenovo LOQ-e 15iax9e Intel Core i5-12450hx 16gb 512gb Ssd Rtx 3050 Windows 11 15.6 - 83me0007br Luna Grey,  , )
+[27/05/2025::14:13:00] DATABASE ERROR: ERRO:  valor é muito longo para tipo character varying(256)
 
-[15/04/2025::14:12:14] [TRY] ADD NEW IN products VALUES (teste40, teste/teste, COUPON10 FGHJ, Frase foda)
-[15/04/2025::14:13:17] READ id FROM products/19
-[15/04/2025::14:13:17] READ name, url, picture_path, price FROM products/19
-[15/04/2025::14:13:17] DATABASE ERROR: ERRO:  erro de sintaxe em ou próximo a "nome2"
-LINE 4:                         WHERE url = '('nome2', 'site3.com', ...
-                                               ^
+[27/05/2025::14:16:48] [TRY] ADD NEW IN products VALUES (Notebook Lenovo LOQ-e 15iax9e Intel Core i5-12450hx 16gb 512gb Ssd Rtx 3050 Windows 11 15.6 - 83me0007br Luna Grey,  , )
+[27/05/2025::14:16:48] DATABASE ERROR: ERRO:  valor é muito longo para tipo character varying(256)
 
-[15/04/2025::14:13:17] [TRY] ADD NEW IN products VALUES (teste40, teste/teste, COUPON10 FGHJ, Frase foda)
-[15/04/2025::14:13:33] READ id FROM products/19
-[15/04/2025::14:13:33] READ name, url, picture_path, price FROM products/19
-[15/04/2025::14:13:33] DATABASE ERROR: ERRO:  erro de sintaxe em ou próximo a "nome2"
-LINE 4:                         WHERE url = '('nome2', 'site3.com', ...
-                                               ^
-
-[15/04/2025::14:13:33] [TRY] ADD NEW IN products VALUES (teste40, teste/teste, COUPON10 FGHJ, Frase foda)
-[15/04/2025::14:13:33] DATABASE ERROR: ERRO:  duplicar valor da chave viola a restrição de unicidade "unique_url"
-DETAIL:  Chave (url)=(site.com) já existe.
-
-[15/04/2025::14:15:32] FAIL READ id FROM products/site3.com: Not found
-[15/04/2025::14:15:32] READ name, url, picture_path, price FROM products/-1
-[15/04/2025::14:15:32] FAIL READ id FROM products/None: Not found
-[15/04/2025::14:15:32] [TRY] ADD NEW IN products VALUES (teste40, teste/teste, COUPON10 FGHJ, Frase foda)
-[15/04/2025::14:15:32] READ id FROM products/22
-[15/04/2025::14:15:32] [TRY] ADD NEW IN product_price VALUES (320.4, 22)
-[15/04/2025::14:15:32] ADDED NEW price IN product_price/22
-[15/04/2025::14:15:32] READ id FROM products/22
-[15/04/2025::14:15:32] ADDED NEW IN products/22 VALUES (teste40, teste/teste, COUPON10 FGHJ, Frase foda)
-[15/04/2025::14:21:26] FAIL READ id FROM products/site3.com: Not found
-[15/04/2025::14:21:26] READ name, url, picture_path, price FROM products/-1
-[15/04/2025::14:21:26] FAIL READ id FROM products/None: Not found
-[15/04/2025::14:22:31] FAIL READ id FROM products/site300.com: Not found
-[15/04/2025::14:22:55] READ id FROM products/22
-[15/04/2025::14:24:02] READ id FROM products/22
-[15/04/2025::14:24:02] READ name, price, active FROM products/22
-[15/04/2025::14:24:09] FAIL READ id FROM products/22: Not found
-[15/04/2025::14:24:09] READ name, price, active FROM products/22
-[15/04/2025::14:24:13] FAIL READ id FROM products/23: Not found
-[15/04/2025::14:24:13] READ name, price, active FROM products/23
-[28/04/2025::14:41:33] [TRY] ADD NEW IN products VALUES (teste500k, 5/0/0/k/./c/o/m, 500KK iss, teste)
-[28/04/2025::14:41:52] [TRY] ADD NEW IN products VALUES (teste500k, 5/0/0/k/./c/o/m, 500KK iss, teste)
-[28/04/2025::14:42:26] [TRY] ADD NEW IN products VALUES (teste500k, 5/0/0/k/./c/o/m, 500KK iss, teste)
-[28/04/2025::14:43:02] [TRY] ADD NEW IN products VALUES (teste500k, 5/0/0/k/./c/o/m, 500KK iss, teste)
-[28/04/2025::14:43:40] [TRY] ADD NEW IN products VALUES (teste500k, 5/0/0/k/./c/o/m, 500KK iss, teste)
-[28/04/2025::14:44:09] [TRY] ADD NEW IN products VALUES (teste500k, 5/0/0/k/./c/o/m, 500KK iss, teste)
-[28/04/2025::14:44:09] READ id FROM products/23
-[28/04/2025::14:44:09] [TRY] ADD NEW IN product_price VALUES (500.005, 23)
-[28/04/2025::14:44:09] ADDED NEW price IN product_price/23
-[28/04/2025::14:44:09] READ id FROM products/23
-[28/04/2025::14:44:09] ADDED NEW IN products/23 VALUES (teste500k, 5/0/0/k/./c/o/m, 500KK iss, teste)
-[28/04/2025::14:55:27] READ id FROM products/22
-[28/04/2025::14:55:27] UPDATED product 22: name = %s
-[28/04/2025::14:55:27] ADDED new price 700.07 to product 22
-[28/04/2025::14:58:10] READ id FROM products/22
-[28/04/2025::14:58:10] UPDATED product 22: name = %s
-[28/04/2025::14:58:10] PRICE UNCHANGED for product 22
-[28/04/2025::14:59:51] READ id FROM products/23
-[28/04/2025::14:59:51] DATABASE ERROR (update): ERRO:  duplicar valor da chave viola a restrição de unicidade "unique_url"
-DETAIL:  Chave (url)=(site.com) já existe.
-
-[28/04/2025::15:00:22] READ id FROM products/23
-[28/04/2025::15:00:22] UPDATED product 23: picture_path = %s
-[28/04/2025::15:00:37] READ id FROM products/23
-[28/04/2025::15:00:37] UPDATED product 23: picture_path = %s
-[28/04/2025::15:03:48] READ id FROM products/23
-[28/04/2025::15:03:48] UPDATED ['phrase = %s'] FROM products/23
-[21/05/2025::14:34:27] [TRY] ADD NEW IN products VALUES (Natura Homem DOM - 100 ml | Natura, h/t/t/p/s/://///w/w/w/./a/m/a/z/o/n/./c/o/m/./b/r///N/a/t/u/r/a/-/H/o/m/e/m/-/D/O/M/-/1/0/0///d/p///B/0/7/W/D/Z/G/Y/B/S///?/_/e/n/c/o/d/i/n/g/=/U/T/F/8/&/r/e/f/_/=/p/d/_/h/p/_/d/_/a/t/f/_/c/i/_/m/c/x/_/m/r/_/c/a/_/h/p/_/a/t/f/_/d,  , )
-[21/05/2025::14:34:27] READ id FROM products/24
-[21/05/2025::14:34:27] [TRY] ADD NEW IN product_price VALUES (Natura Homem DOM - 100 ml | Natura, 24)
-[21/05/2025::14:34:27] DATABASE ERROR: ERRO:  valor é muito longo para tipo character varying(20)
-
-[21/05/2025::14:34:27] READ id FROM products/24
-[21/05/2025::14:34:27] ADDED NEW IN products/24 VALUES (Natura Homem DOM - 100 ml | Natura, h/t/t/p/s/://///w/w/w/./a/m/a/z/o/n/./c/o/m/./b/r///N/a/t/u/r/a/-/H/o/m/e/m/-/D/O/M/-/1/0/0///d/p///B/0/7/W/D/Z/G/Y/B/S///?/_/e/n/c/o/d/i/n/g/=/U/T/F/8/&/r/e/f/_/=/p/d/_/h/p/_/d/_/a/t/f/_/c/i/_/m/c/x/_/m/r/_/c/a/_/h/p/_/a/t/f/_/d,  , )
-[21/05/2025::14:34:27] [TRY] READ name, picture_path, price FROM products/https://www.amazon.com.br/Natura-Homem-DOM-100/dp/B07WDZGYBS/?_encoding=UTF8&ref_=pd_hp_d_atf_ci_mcx_mr_ca_hp_atf_d
-[21/05/2025::14:34:27] READ id FROM products/24
-[21/05/2025::14:34:27] READ name, picture_path, price FROM products/24
+[27/05/2025::14:18:52] [TRY] ADD NEW IN products VALUES (Notebook Lenovo LOQ-e 15iax9e Intel Core i5-12450hx 16gb 512gb Ssd Rtx 3050 Windows 11 15.6 - 83me0007br Luna Grey,  , )
+[27/05/2025::14:18:52] READ id FROM products/25
+[27/05/2025::14:18:52] [TRY] ADD NEW IN product_price VALUES (4699, 25)
+[27/05/2025::14:18:52] ADDED NEW price IN product_price/25
+[27/05/2025::14:18:52] READ id FROM products/25
+[27/05/2025::14:18:52] ADDED NEW IN products/25 VALUES (Notebook Lenovo LOQ-e 15iax9e Intel Core i5-12450hx 16gb 512gb Ssd Rtx 3050 Windows 11 15.6 - 83me0007br Luna Grey,  , )
+[27/05/2025::14:18:52] [TRY] READ name, picture_path, price FROM products/https://www.mercadolivre.com.br/notebook-lenovo-loq-e-15iax9e-intel-core-i5-12450hx-16gb-512gb-ssd-rtx-3050-windows-11-156-83me0007br-luna-grey/p/MLB46018205?pdp_filters=deal%3AMLB779362-1#polycard_client=homes-korribanSearchPromotions&searchVariation=MLB46018205&wid=MLB4018513705&position=8&search_layout=grid&type=product&tracking_id=b9a8b819-e79d-4bf7-bfd3-4dd896862a17&sid=search&c_id=/home/promotions-recommendations/element&c_uid=a829cf66-53c2-407c-9dc6-4feb253b4369
+[27/05/2025::14:18:52] READ id FROM products/25
+[27/05/2025::14:18:52] READ name, picture_path, price FROM products/25
+[28/05/2025::14:32:09] [TRY] ADD NEW IN products VALUES (Notebook Gamer Lenovo Loq 15irh8 Intel Core i5 12450H 16gb RAM 512GB SSD RTX 2050 Windows 11 Home Tela 15,6" Full HD 83EU0001BR,  , )
+[28/05/2025::14:32:09] READ id FROM products/26
+[28/05/2025::14:32:09] [TRY] ADD NEW IN product_price VALUES (5499, 26)
+[28/05/2025::14:32:09] ADDED NEW price IN product_price/26
+[28/05/2025::14:32:09] READ id FROM products/26
+[28/05/2025::14:32:09] ADDED NEW IN products/26 VALUES (Notebook Gamer Lenovo Loq 15irh8 Intel Core i5 12450H 16gb RAM 512GB SSD RTX 2050 Windows 11 Home Tela 15,6" Full HD 83EU0001BR,  , )
+[28/05/2025::14:32:09] READ id FROM products/26
+[28/05/2025::14:32:09] UPDATED ['coupon = %s', 'category = %s'] FROM products/26
+[28/05/2025::14:32:09] [TRY] READ * FROM products/26
+[28/05/2025::14:32:09] FAIL READ id FROM products/26: Not found
+[28/05/2025::14:32:09] READ * FROM products/26

@@ -2,6 +2,11 @@ import psycopg2 as psy
 from datetime import date, datetime
 import time
 
+import sys
+import os
+sys.path.append(os.path.abspath('..'))
+
+from utils import log
 connection = {
 "dbname":       "pedraodb",
 "user":         "postgres",
@@ -17,7 +22,7 @@ def addProduct(name, url, price, coupon, category, phrase):
                 log(f"[TRY] ADD NEW IN products VALUES ({name}, {coupon} {category}, {phrase})")
                 query = f""" 
                     INSERT INTO products(name, url, coupon, category, phrase) 
-                    VALUES(%s, %s, %s, %s, %s, %s);
+                    VALUES(%s, %s, %s, %s, %s);
                 """
                 cur.execute(query, (name, url, coupon, category, phrase))
                 conn.commit()

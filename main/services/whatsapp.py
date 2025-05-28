@@ -1,11 +1,17 @@
 import requests
+from dotenv import load_dotenv
+import os
 
-#temporario, pelo amor de deus N DEIXA VAZAR
-ACCESS_TOKEN = 'EACLKdCDWmR4BO1ttOj019ZARqpxJX3fPCjC60z0ZCHKEe0eilTjnFEmAKVhkhIgwhsyY8ZBydZAIBfBYVCu1UFQQrjPu5U0SJ9KbfZChTnvmTBPZCOQdA1Xkmo2YeNNyqIeeZAMjK6F16VQYmr4gqE6Fo5IzwTpeonlllEUOuN9I7q54l08XZAgYuMMETht9xn0xhIMmuCuHPIpfVDXX0WGq7rKhKa9okGj7c643gLYeZCls74n7WelsEVwZDZD' 
+load_dotenv()
 
-PHONE_NUMBER_ID = '673567229167004'
+PHONE_NUMBER_ID = os.getenv("WHATSAPP_PHONE_NUM_ID")
+ADMIN_NUM = os.getenv("WHATSAPP_ADMIN_NUM1")
+ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")
 
-def sendTextMessage():
+def admin_numbers():
+    return ADMIN_NUM
+
+def sendTextMessage(mensagem, number):
     url = f'https://graph.facebook.com/v22.0/{PHONE_NUMBER_ID}/messages'
     headers = {
         "Content-Type": "application/json",
@@ -14,7 +20,7 @@ def sendTextMessage():
     data = {
         "messaging_product": "whatsapp",
         "recipient_type": "individual",
-        "to": "+5531975064142",
+        "to": f"+{number}",
         "type": "text",
         "text": {
             "preview_url": True,

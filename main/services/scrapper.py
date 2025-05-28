@@ -8,10 +8,10 @@ import sys
 import os
 sys.path.append(os.path.abspath('..')) #Para incluir os modulos em main/      
 
-from libs import utils
+from utils import log
 
 def getProductInfo(url):
-    utils.write_log("scrapper",  f'[TRY] READ "{url}"')    
+    log("scrapper",  f'[TRY: READ PRODUCT FROM "{url}"]')    
     
     product = {
         'name': '',
@@ -20,107 +20,90 @@ def getProductInfo(url):
     }
 
     site = url.split('/')[2].split('.')[1]
-   
-    if site == 'amazon':
-        product = amazon(url, product)
-    elif site == 'mercadolivre':
-        product = mercadoLivre(url, product)
-    elif site == 'netshoes':
-        product = netshoes(url, product)
-    else: 
-        utils.write_log("scrapper",  f'ERROR READING "{url}": Site not supported')
-   
-    if product == 0:
-        utils.write_log("scrapper",  f'FAIL READ "{url}"')
-        return 0
     
+    try:
+        if site == 'amazon':
+            product = amazon(url, product)
+        elif site == 'mercadolivre':
+            product = mercadoLivre(url, product)
+        elif site == 'netshoes':
+            product = netshoes(url, product)
+        else: 
+            log("scrapper",  f'[ERROR: READING PRODUCT FROM "{url}"] ERROR: Site not supported')
+    except Exception as e:
+        log("scrapper", f'[ERROR: READING PRODUCT FROM "{url}"] ERROR: {e}')
 
-    utils.write_log("scrapper",  f'READ "{url}"') 
+    log("scrapper",  f'READ "{url}"') 
     return product
 
 
 def amazon(url, product):
-    try:
-        driver = webdriver.Chrome()
-        driver.get(url)
+    driver = webdriver.Chrome()
+    driver.get(url)
         
-        product['name'] = wwait(driver, 10).until(
-            EC.visibility_of_element_located((By.ID, 'productTitle'))
-        ).text
+    """ Espera carregar e pega o nome"""
+    product['name'] = wwait(driver, 10).until(
+        EC.visibility_of_element_located((By.ID, 'productTitle'))
+    ).text
 
+    """ Pega o preço e formata """
+    price_div = driver.find_element(By.CLASS_NAME, 'a-price')
+    price_string = (price_div
+                    .find_element(By.XPATH, './*[2]')
+                    .text
+                    .replace('\n', ',')    #para deixar em um formato melhor para ser tratada 
+                    )                      #posteriormente
+    
+    product['price'] = price_string[2:]
 
-        price_div = driver.find_element(By.CLASS_NAME, 'a-price')
-        price_string = (price_div
-                        .find_element(By.XPATH, './*[2]')
-                        .text
-                        .replace('\n', ',')    #para deixar em um formato melhor para ser tratada 
-                        )                      #posteriormente
-        
-        product['price'] = price_string[2:]
+    """ Pega a url para baixar a imagem """
+    picture_element = driver.find_element(By.ID, 'landingImage')
+    product['picture_url'] = picture_element.get_attribute('src')
+    
 
-        picture_element = driver.find_element(By.ID, 'landingImage')
-        product['picture_url'] = picture_element.get_attribute('src')
-        
-
-        driver.quit()
-        return product
-
-    except Exception as e:
-        utils.write_log("scrapper",  f'ERROR: {e}')
-        driver.quit()
-        return 0
-
+    driver.quit()
+    return product
 
 def netshoes(url, product):
-    try:
-        driver = webdriver.Chrome()
-        driver.get(url)
-       
-        product['name'] = wwait(driver, 10).until(
-            EC.visibility_of_element_located((By.CLASS_NAME, 'product-name'))
-        ).text
-        
-        product['price'] = (driver.find_element(By.CSS_SELECTOR, 'span.saleInCents-value')
-                            .get_attribute('outerHTML')
-                            .split(' ')[15][:-1])
+    driver = webdriver.Chrome()
+    driver.get(url)
+   
+    """ Espera carregar e pega o nome"""
+    product['name'] = wwait(driver, 10).until(
+        EC.visibility_of_element_located((By.CLASS_NAME, 'product-name'))
+    ).text
+    
+    """ Pega o preço e formata """
+    product['price'] = (driver.find_element(By.CSS_SELECTOR, 'span.saleInCents-value')
+                        .get_attribute('outerHTML')
+                        .split(' ')[15][:-1])
 
-        product['picture_url'] = (driver
-                                  .find_element(By.CLASS_NAME, 'carousel-item-figure__image')
-                                  .get_attribute('src')
-                                  )
+    """ Pega a url para baixar a imagem """
+    product['picture_url'] = (driver
+                              .find_element(By.CLASS_NAME, 'carousel-item-figure__image')
+                              .get_attribute('src'))
 
-        driver.quit()
-        return product
-
-    except Exception as e:
-        utils.write_log("scrapper",  f'ERROR: {e}')
-        driver.quit()
-        return 0
+    driver.quit()
+    return product
 
 
 def mercadoLivre(url, product):
-    try:
-        driver = webdriver.Chrome()
-        driver.get(url)
-        
-        """ Espera o site carregar e pega o nome do produto """
-        product['name'] = wwait(driver, 10).until(
-            EC.visibility_of_element_located((By.CLASS_NAME, 'ui-pdp-title'))
-        ).text
-       
-        """ Pega o preço e converte em float """
-        price_element = driver.find_element(By.CSS_SELECTOR, 'meta[itemprop="price"]') 
-        price_text = price_element.get_attribute('content')
-        product['price'] = price_text
-        
-        """ Pega o url para baixar a imagem """
-        picture_element = driver.find_element(By.CLASS_NAME, 'ui-pdp-gallery__figure__image')
-        product['picture_url'] = picture_element.get_attribute('src')
-        
-        driver.quit()
-        return product
-
-    except Exception as e:
-        utils.write_log("scrapper",  f'ERROR: {e}')
-        driver.quit()
-        return 0
+    driver = webdriver.Chrome()
+    driver.get(url)
+    
+    """ Espera o site carregar e pega o nome do produto """
+    product['name'] = wwait(driver, 10).until(
+        EC.visibility_of_element_located((By.CLASS_NAME, 'ui-pdp-title'))
+    ).text
+   
+    """ Pega o preço """
+    price_element = driver.find_element(By.CSS_SELECTOR, 'meta[itemprop="price"]') 
+    price_text = price_element.get_attribute('content')
+    product['price'] = price_text
+    
+    """ Pega o url para baixar a imagem """
+    picture_element = driver.find_element(By.CLASS_NAME, 'ui-pdp-gallery__figure__image')
+    product['picture_url'] = picture_element.get_attribute('src')
+    
+    driver.quit()
+    return product
