@@ -20,4 +20,3 @@ print(f"Túnel ngrok ativo em: {public_url}/webhook")
 
 # Inicia o servidor Flask
 app.run(port=5000)
-

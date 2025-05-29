@@ -1,17 +1,21 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait as wwait
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support import expected_conditions as EC    
 
-import sys
 import os
-sys.path.append(os.path.abspath('..')) #Para incluir os modulos em main/      
 
-from utils import log
+from ..utils import log
+# Carrega as variáveis de ambiente do arquivo .env
+from dotenv import load_dotenv
+load_dotenv()
+
+# Define origem dinâmica para os logs
+ENV_STATE = os.getenv("DEBUG_MODE")
+LOG_ORIGIN = f"SCRAPPER:{ENV_STATE}"
 
 def getProductInfo(url):
-    log("scrapper",  f'[TRY: READ PRODUCT FROM "{url}"]')    
+    log(LOG_ORIGIN, f"[TRY: READ PRODUCT] {url}")    
     
     product = {
         'name': '',
@@ -29,11 +33,11 @@ def getProductInfo(url):
         elif site == 'netshoes':
             product = netshoes(url, product)
         else: 
-            log("scrapper",  f'[ERROR: READING PRODUCT FROM "{url}"] ERROR: Site not supported')
+            log(LOG_ORIGIN, f"[FAILED: READ PRODUCT] {url} - Site not supported")
     except Exception as e:
-        log("scrapper", f'[ERROR: READING PRODUCT FROM "{url}"] ERROR: {e}')
+        log(LOG_ORIGIN, f"[FAILED: READ PRODUCT] {url} - {e}")
 
-    log("scrapper",  f'READ "{url}"') 
+    log(LOG_ORIGIN, f"[SUCCEDED: READ PRODUCT] {url}") 
     return product
 
 

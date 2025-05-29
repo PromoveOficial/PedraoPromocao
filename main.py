@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
 
-from data import database as db
-from services import scrapper as scr
-import re
+from main.data import database as db
+from main.administration import scrapper as scr
 
 
 def main():
-    #try:
+    try:
         while True:
-
             url = input("url: \n")
             
             #Vou deixar os 3 vazios para testar por enquanto, esses tem q ser inseridos manualmente
@@ -26,8 +24,11 @@ def main():
                 p_id = db.getProductID(url)
                 db.updateProduct(p_id, coupon="TESTEFODA", category="teste categoria")
                 print(db.getProduct(p_id, "*"))
-    #except Exception as e:
-    #    print(e)
+    except KeyboardInterrupt as e:
+        print("\nExiting...")
+        print("Program terminated by user.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
 if __name__ == "__main__":
     main()
