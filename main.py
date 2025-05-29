@@ -5,30 +5,40 @@ from main.administration import scrapper as scr
 
 
 def main():
-    try:
-        while True:
-            url = input("url: \n")
-            
-            #Vou deixar os 3 vazios para testar por enquanto, esses tem q ser inseridos manualmente
-            coupon = ""
-            category = ""
-            phrase = ""
-            #
-            
-            product_info = scr.getProductInfo(url)
+    action = input("Choose an action (1: Scrape Product, 2: Exit): ").strip()
+    
+    if action == '1':
+        try:
+            while True:
+                print("Welcome to the Product Scraper!")
+                url = input("Enter the product URL (or 'exit' to quit): ").strip()
+                
+                if url.lower() == 'exit':
+                    print("Exiting the program.")
+                    break
+                
+                product_info = scr.getProductInfo(url)
+                
+                if product_info:
+                    print(f"Product Name: {product_info['name']}")
+                    print(f"Product Price: {product_info['price']}")
+                    print(f"Product Picture URL: {product_info['picture_url']}")
+                    
+                    # Save to database
+                    db.addProduct(product_info['name'], url, product_info['price'], "nada", "nada", "nada")
+                    print("Product information saved to the database.")
+                else:
+                    print("Failed to retrieve product information. Please check the URL and try again.")
+                print("\n" + "="*40 + "\n")
+        except KeyboardInterrupt as e:
+            print("\nExiting...")
+            print("Program terminated by user.")
+        except Exception as e:
+            print(f"An error occurred: {e}")
 
-            name = product_info['name']
-            price = product_info['price']
-            
-            if db.addProduct(name, url, price, coupon, category, phrase) == 1:
-                p_id = db.getProductID(url)
-                db.updateProduct(p_id, coupon="TESTEFODA", category="teste categoria")
-                print(db.getProduct(p_id, "*"))
-    except KeyboardInterrupt as e:
-        print("\nExiting...")
-        print("Program terminated by user.")
-    except Exception as e:
-        print(f"An error occurred: {e}")
-
+    elif action == '2':
+        print("Exiting the program.")
+        return 
+    
 if __name__ == "__main__":
     main()

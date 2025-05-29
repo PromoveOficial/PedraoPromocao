@@ -12,7 +12,7 @@ load_dotenv()
 
 # Define origem dinâmica para os logs
 ENV_STATE = os.getenv("DEBUG_MODE")
-LOG_ORIGIN = f"SCRAPPER:{ENV_STATE}"
+LOG_ORIGIN = f"SCRAPPER"
 
 def getProductInfo(url):
     log(LOG_ORIGIN, f"[TRY: READ PRODUCT] {url}")    
@@ -36,6 +36,7 @@ def getProductInfo(url):
             log(LOG_ORIGIN, f"[FAILED: READ PRODUCT] {url} - Site not supported")
     except Exception as e:
         log(LOG_ORIGIN, f"[FAILED: READ PRODUCT] {url} - {e}")
+        return None
 
     log(LOG_ORIGIN, f"[SUCCEDED: READ PRODUCT] {url}") 
     return product

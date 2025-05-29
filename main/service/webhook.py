@@ -1,22 +1,27 @@
 from flask import Flask, request
 from pyngrok import ngrok
 
-# Inicia a aplicação Flask
-app = Flask(__name__)
+class WebhookService:
+    def __init__(self, app: Flask):
+        self.app = app
+        self.ngrok_tunnel = None
 
-# Define uma rota para receber requisições POST e GET
-@app.route("/webhook", methods=["GET", "POST"])
-def webhook():
-    if request.method == "POST":
-        data = request.json
-        print("Recebido (POST):", data)
-        return "POST recebido", 200
-    else:
-        return "GET OK", 200
+    def start_ngrok(self, port: int = 5000):
+        """Start ngrok tunnel."""
+        self.ngrok_tunnel = ngrok.connect(port)
+        print(f"Ngrok tunnel started at {self.ngrok_tunnel}")
 
-# Cria o túnel ngrok para a porta 5000
-public_url = ngrok.connect(5000)
-print(f"Túnel ngrok ativo em: {public_url}/webhook")
+    def stop_ngrok(self):
+        """Stop ngrok tunnel."""
+        if self.ngrok_tunnel:
+            ngrok.disconnect(self.ngrok_tunnel.public_url)
+            print("Ngrok tunnel stopped.")
+            self.ngrok_tunnel = None
 
-# Inicia o servidor Flask
-app.run(port=5000)
+    def register_webhook(self, url: str):
+        """Register a webhook URL."""
+        @self.app.route(url, methods=['POST'])
+        def webhook():
+            data = request.json
+            print(f"Received webhook data: {data}")
+            return '', 200

@@ -9,7 +9,7 @@ load_dotenv()
 
 # Define origem dinâmica para os logs
 ENV_STATE = os.getenv("DEBUG")
-LOG_ORIGIN = f"DATABASE:{ENV_STATE}"
+LOG_ORIGIN = f"DATABASE"
 
 CONNECTION = {
     "dbname":       "pedraodb",
