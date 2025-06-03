@@ -10,17 +10,12 @@ class Product:
         self.category = ""
         self.phrase = ""
 
-    def getTextMessageBody(self):
-        f"""Produto: {self.name}, Preço: {self.price}, e tudo mais q tem q ter, aguarde o chefinho mandar
-        """
-
-    def categorize(self):
-        if category != "":
-            return
-
-        #Em processo de pensar
-
+    def basicMessage(self):
+        mensagem = """"""
+        
     def verifyImage(self):
         arquivos = glob.glob(f"pictures/{self.id}.*") 
         if arquivos:
             return 1
+        
+        

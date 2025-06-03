@@ -6,3 +6,19 @@
 [29/05/2025::15:19:05] [TRY: READ PRODUCT ID] products/https://produto.mercadolivre.com.br/MLB-5351280640-jaqueta-masculina-casaco-casual-punho-ribana-forrado-bomber-_JM#polycard_client=recommendations_vip-pads-up&reco_backend=vip-pads-up-experimental-a_marketplace&reco_model=rk_ent_v2_retsys_ads&reco_client=vip-pads-up&reco_item_pos=1&reco_backend_type=low_level&reco_id=b6297559-7f98-46f2-aac5-8bf34d171615&is_advertising=true&ad_domain=VIPDESKTOP_UP&ad_position=2&ad_click_id=MjNhMTNlZWQtMTQzYS00ODFjLWE2MTAtYWQyZDM1YTMwMDA2
 [29/05/2025::15:19:05] [SUCCEDED: READ PRODUCT ID] product/31
 [29/05/2025::15:19:05] [SUCCEDED: ADD PRODUCT] product/31
+[29/05/2025::21:11:43] [TRY: ADD PRODUCT] product/https://www.mercadolivre.com.br/etiqueta-40x25-2-colunas-termica-kit-05-rolos-zebra-argox-cor-branco/p/MLB43844347#polycard_client=recommendations_home_navigation-trend-recommendations&reco_backend=machinalis-homes-univb&wid=MLB3918314077&reco_client=home_navigation-trend-recommendations&reco_item_pos=4&reco_backend_type=function&reco_id=73979348-3974-4669-b8da-869027f275d1&sid=recos&c_id=/home/navigation-trend-recommendations/element&c_uid=19d15cc6-e6d7-421c-a79a-7f5c2ff8282f
+[29/05/2025::21:11:43] [TRY: ADD PRICE] product/https://www.mercadolivre.com.br/etiqueta-40x25-2-colunas-termica-kit-05-rolos-zebra-argox-cor-branco/p/MLB43844347#polycard_client=recommendations_home_navigation-trend-recommendations&reco_backend=machinalis-homes-univb&wid=MLB3918314077&reco_client=home_navigation-trend-recommendations&reco_item_pos=4&reco_backend_type=function&reco_id=73979348-3974-4669-b8da-869027f275d1&sid=recos&c_id=/home/navigation-trend-recommendations/element&c_uid=19d15cc6-e6d7-421c-a79a-7f5c2ff8282f
+[29/05/2025::21:11:43] [TRY: READ PRODUCT ID] products/https://www.mercadolivre.com.br/etiqueta-40x25-2-colunas-termica-kit-05-rolos-zebra-argox-cor-branco/p/MLB43844347#polycard_client=recommendations_home_navigation-trend-recommendations&reco_backend=machinalis-homes-univb&wid=MLB3918314077&reco_client=home_navigation-trend-recommendations&reco_item_pos=4&reco_backend_type=function&reco_id=73979348-3974-4669-b8da-869027f275d1&sid=recos&c_id=/home/navigation-trend-recommendations/element&c_uid=19d15cc6-e6d7-421c-a79a-7f5c2ff8282f
+[29/05/2025::21:11:43] [SUCCEDED: READ PRODUCT ID] product/32
+[29/05/2025::21:11:43] [SUCCEDED: ADD PRICE] product_price/21
+[29/05/2025::21:11:43] [TRY: READ PRODUCT ID] products/https://www.mercadolivre.com.br/etiqueta-40x25-2-colunas-termica-kit-05-rolos-zebra-argox-cor-branco/p/MLB43844347#polycard_client=recommendations_home_navigation-trend-recommendations&reco_backend=machinalis-homes-univb&wid=MLB3918314077&reco_client=home_navigation-trend-recommendations&reco_item_pos=4&reco_backend_type=function&reco_id=73979348-3974-4669-b8da-869027f275d1&sid=recos&c_id=/home/navigation-trend-recommendations/element&c_uid=19d15cc6-e6d7-421c-a79a-7f5c2ff8282f
+[29/05/2025::21:11:43] [SUCCEDED: READ PRODUCT ID] product/32
+[29/05/2025::21:11:43] [SUCCEDED: ADD PRODUCT] product/32
+[29/05/2025::21:13:02] [TRY: ADD PRODUCT] product/https://mercadolivre.com/sec/1YZoiq1
+[29/05/2025::21:13:02] [TRY: ADD PRICE] product/https://mercadolivre.com/sec/1YZoiq1
+[29/05/2025::21:13:02] [TRY: READ PRODUCT ID] products/https://mercadolivre.com/sec/1YZoiq1
+[29/05/2025::21:13:02] [SUCCEDED: READ PRODUCT ID] product/33
+[29/05/2025::21:13:02] [SUCCEDED: ADD PRICE] product_price/22
+[29/05/2025::21:13:02] [TRY: READ PRODUCT ID] products/https://mercadolivre.com/sec/1YZoiq1
+[29/05/2025::21:13:02] [SUCCEDED: READ PRODUCT ID] product/33
+[29/05/2025::21:13:02] [SUCCEDED: ADD PRODUCT] product/33

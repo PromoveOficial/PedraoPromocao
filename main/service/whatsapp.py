@@ -4,13 +4,13 @@ import os
 
 load_dotenv()
 
+#Colocar dentro da função após finalizar
 PHONE_NUMBER_ID = os.getenv("WHATSAPP_PHONE_NUM_ID")
 ADMIN_NUM1 = os.getenv("WHATSAPP_ADMIN_NUM1")
 ADMIN_NUM2 = os.getenv("WHATSAPP_ADMIN_NUM2")
 
-ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")
-
 def sendTextMessage(mensagem, number):
+    ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")
     url = f'https://graph.facebook.com/v22.0/{PHONE_NUMBER_ID}/messages'
     headers = {
         "Content-Type": "application/json",
