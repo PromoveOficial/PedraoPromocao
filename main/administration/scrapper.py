@@ -5,7 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 import os
 
-from ..utils import log
+from ..utils.component import log
 # Carrega as variáveis de ambiente do arquivo .env
 from dotenv import load_dotenv
 load_dotenv()
