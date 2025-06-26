@@ -4,32 +4,24 @@ import os
 from flask import request
 from flask_restful import Resource
 import redis
-import logging
 from ..utils.responses import *
-from ..utils.cache import Cache # Linha estranha mas prometo q funciona kkkkkkkkkk
 from ..utils.component import Component
+from ..administration.admin_options import ADMIN_NUMBERS, admin_command
+
+KEY_QUEUE = 'queue:messages'
+KEY_USERS = 'users' # Concat the user number
+KEY_MESSAGES = 'messages'
+
+KEY_ENTRYS_PROCESSED = 'entrys'
+
+ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")
+PHONE_NUMBER_ID = os.getenv("WHATSAPP_PHONE_NUM_ID")
+
 
 class Whatsapp(Component, Resource):
     def __init__(self):
         super().__init__()
-
-        self.KEY_QUEUE = 'queue:messages'
-        self.KEY_USERS = 'users' # Concat the user number
-        self.KEY_MESSAGES = 'messages'
-        
-        load_dotenv(override=True)
-
-        # Get the phone number id from env
-        self.PHONE_NUMBER_ID = os.getenv("WHATSAPP_PHONE_NUM_ID")
         # self.logger.debug('Whatsapp phone number loaded')
-        
-        # Setup all admin numbers
-        self.ADMIN_NUMBERS = []
-        i = 1
-        while os.getenv(f"WHATSAPP_ADMIN_NUM{i}") is not None:
-            self.ADMIN_NUMBERS.append(os.getenv(f"WHATSAPP_ADMIN_NUM{i}"))
-            i += 1
-        # self.logger.debug('Admin numbers loaded.')
         
         self.redis = redis.Redis(host='localhost', port=6379, decode_responses=True)
 
@@ -71,24 +63,48 @@ class Whatsapp(Component, Resource):
                 }
             """
             request_content = request.json
-            # self.logger.debug(request_content)
             entry = request_content['entry'][0]['changes'][0]['value']
+                        
+            espected_object = {'messaging_product', 'metadata', 'contacts', 'messages'}
+            if not espected_object.issubset(entry.keys()):
+                response = RequestComplete()
+                return 
             
             received_message = entry['messages'][0]
-            MESSAGE_KEY = f"{self.KEY_MESSAGES}:{received_message['id']}"
+            MESSAGE_KEY = f"{KEY_MESSAGES}:{received_message['id']}"
             message = {
                 'timestamp': received_message['timestamp'],
                 'type': received_message['type'],
                 'content': received_message[received_message['type']] 
             }
             
+            
+            if self.redis.json().get(MESSAGE_KEY, "$") is not None:
+                response = RequestComplete()
+                return
+            
             user_number = entry['contacts'][0]['wa_id']
-            USER_KEY = f"{self.KEY_USERS}:{user_number}"
+            USER_KEY = f"{KEY_USERS}:{user_number}"
             user = self.redis.json().get(USER_KEY, "$")
             
-            if user_number in self.ADMIN_NUMBERS:
-                self.logger.debug('admin mando msg.')
-            
+            # self.logger.debug(f"{user_number}: {message['content']}")
+                        
+            if user_number in ADMIN_NUMBERS:
+                message_text = message['content']['body']
+                self.logger.debug(f"ADMIN: {entry['contacts'][0]['profile']['name']}")
+                response = admin_command(self.logger, message_text)
+                self.logger.debug(response)
+                if response['type'] == 'text':
+                    self.sendTextMessage(response['content'], user_number)
+                elif response['type'] == 'image':
+                    self.sendImageMessage(response['content']['caption'], response['content']['image_url'], user_number)
+                
+                # self.logger.debug(received_message['id'])
+                self.confirm_read(received_message['id'])
+                
+                response = RequestComplete()
+                return
+                
             # If use isn't in the cache create it and add to the queue
             if user is None:
                 user = [{
@@ -98,7 +114,7 @@ class Whatsapp(Component, Resource):
                     'messages': []
                 }]
                 
-                self.redis.zadd(self.KEY_QUEUE, {received_message['timestamp']: user_number})
+                self.redis.zadd(KEY_QUEUE, {user_number: received_message['timestamp']})
                 
             user = user[0] # Redis return in a list, so to remove it we made the user 
             # in a self list and remove it from it here
@@ -107,10 +123,12 @@ class Whatsapp(Component, Resource):
             
             self.redis.json().set(MESSAGE_KEY, "$", message)
             self.redis.json().set(USER_KEY, "$", user)
+            
+            self.confirm_read(received_message['id'])
 
             # self.logger.debug(self.redis.json().get(USER_KEY, "$"))
             # self.logger.debug(self.redis.json().get(MESSAGE_KEY, "$"))
-            # self.logger.debug(self.redis.zcard(self.KEY_QUEUE))
+            # self.logger.debug(self.redis.zcard(KEY_QUEUE))
                                                           
             response = RequestComplete()
         except RequestError as e:
@@ -122,9 +140,23 @@ class Whatsapp(Component, Resource):
             return response.content
     
     
+    def confirm_read(self, messsage_id):
+        url = f'https://graph.facebook.com/v22.0/{PHONE_NUMBER_ID}/messages'
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {ACCESS_TOKEN}"
+            }
+        data = { 
+            "messaging_product": "whatsapp", 
+            "status": "read", 
+            "message_id": f"{messsage_id}" 
+        }
+        
+        response = requests.post(url, headers=headers, json=data)
+        self.logger.debug(f"{messsage_id}: {response.json()}")
+        
     def sendTextMessage(self, message, number):
-        ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")
-        url = f'https://graph.facebook.com/v22.0/{self.PHONE_NUMBER_ID}/messages'
+        url = f'https://graph.facebook.com/v22.0/{PHONE_NUMBER_ID}/messages'
         headers = {
             "Content-Type": "application/json",
             "Authorization": f"Bearer {ACCESS_TOKEN}"
@@ -139,8 +171,26 @@ class Whatsapp(Component, Resource):
                 "body": f"{message}"
                 }
             }
-
-
         response = requests.post(url, headers=headers, json=data)
-        print(response.status_code)
-        print(response.json())
+        # self.logger.debug(response.status_code)
+        # self.logger.debug(response.json())
+
+    def sendImageMessage(self, caption, image_url, number):
+        url = f'https://graph.facebook.com/v22.0/{PHONE_NUMBER_ID}/messages'
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {ACCESS_TOKEN}"
+        }
+        data = {
+            "messaging_product": "whatsapp",
+            "recipient_type": "individual",
+            "to": f"{number}",
+            "type": "image",
+            "image": {
+                "link": f"{image_url}",
+                "caption": f"{caption}"
+            }
+        }
+        
+        response = requests.post(url, headers=headers, json=data)
+        self.logger.debug(response.json())

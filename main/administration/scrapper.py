@@ -1,44 +1,39 @@
+#!/home/kaiqbbrs/promove/pedraobot/.venv/bin/python3
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait as wwait
 from selenium.webdriver.support import expected_conditions as EC    
 
-import os
-
-from ..utils.component import log
 # Carrega as variáveis de ambiente do arquivo .env
 from dotenv import load_dotenv
+from logging import Logger
+import logging  
+
 load_dotenv()
 
-# Define origem dinâmica para os logs
-ENV_STATE = os.getenv("DEBUG_MODE")
-LOG_ORIGIN = f"SCRAPPER"
+def getProductInfo(logger: Logger, url):
+    # logger.debug(f"[TRY: READ PRODUCT] {url}")    
 
-def getProductInfo(url):
-    log(LOG_ORIGIN, f"[TRY: READ PRODUCT] {url}")    
+    site = url.split('/')[2]
+    logger.debug(site)
     
-    product = {
-        'name': '',
-        'price': '',
-        'picture_url': ''
-    }
-
-    site = url.split('/')[2].split('.')[1]
+    product = {}
     
     try:
-        if site == 'amazon':
+        if site in ['www.amazon.com.br', 'amzn.to']:
             product = amazon(url, product)
-        elif site == 'mercadolivre':
-            product = mercadoLivre(url, product)
-        elif site == 'netshoes':
+        elif site in ['www.mercadolivre.com.br', 'produto.mercadolivre.com.br', 'mercadolivre.com']:
+            product = mercadoLivre(logger, url, product)
+        elif site == 'www.netshoes.com.br':
             product = netshoes(url, product)
         else: 
-            log(LOG_ORIGIN, f"[FAILED: READ PRODUCT] {url} - Site not supported")
+            product = "Site not supported."
     except Exception as e:
-        log(LOG_ORIGIN, f"[FAILED: READ PRODUCT] {url} - {e}")
-        return None
+        logger.critical(e)
+        product = None
 
-    log(LOG_ORIGIN, f"[SUCCEDED: READ PRODUCT] {url}") 
+    # logger.debug(f"[SUCCEDED: READ PRODUCT] {url}") 
     return product
 
 
@@ -92,8 +87,16 @@ def netshoes(url, product):
     return product
 
 
-def mercadoLivre(url, product):
+def mercadoLivre(logger, url, product):
     driver = webdriver.Chrome()
+    
+    if url.split('/')[3] == 'sec':
+        driver.get(url)
+        url = wwait(driver, 10).until(
+            EC.visibility_of_element_located((By.CSS_SELECTOR, 'a.poly-component_link.poly-component_link--action-link'))
+        ).get_attribute('href')
+        logger.debug(url)
+    
     driver.get(url)
     
     """ Espera o site carregar e pega o nome do produto """
@@ -112,3 +115,30 @@ def mercadoLivre(url, product):
     
     driver.quit()
     return product
+
+
+def __main__():
+    logger = logging.getLogger(__name__)
+    
+    if not logger.hasHandlers():
+            logger.setLevel(logging.DEBUG)
+
+            handler = logging.StreamHandler()
+
+            formatter = logging.Formatter(
+                # '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+                '[%(asctime)s] [%(levelname)s] %(message)s'
+            )
+
+            handler.setFormatter(formatter)
+            logger.addHandler(handler)
+    
+    try:
+        while True:
+            url = input('url:\n')
+            logger.debug(getProductInfo(logger, url))
+    except KeyboardInterrupt:
+        logger.debug('Exiting...')
+        
+if __name__ == '__main__':
+    __main__()
